@@ -11,6 +11,10 @@ export const routes: Routes = [
 
   // Public routes — no auth required
   {
+    path: 'hero',
+    loadComponent: () => import('./features/hero/hero.component').then(m => m.HeroComponent),
+  },
+  {
     path: 'login',
     loadComponent: () => import('./features/iam/auth/login/login').then(m => m.Login),
   },

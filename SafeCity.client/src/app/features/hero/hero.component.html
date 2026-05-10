@@ -1,0 +1,40 @@
+<div class="relative min-w-screen overflow-hidden bg-white">
+  <!-- Navbar -->
+  <nav class="relative z-20 flex items-center justify-between px-6 md:px-16  bg-slate-950 border-b border-white/10">
+    <div class="flex items-center gap-2">
+      <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+        <span class="text-black font-bold text-lg">SC</span>
+      </div>
+      <span class="text-white text-xl font-bold hidden sm:inline">SafeCity</span>
+    </div>
+
+    <ul class="hidden md:flex gap-8 text-white/80 text-sm font-medium">
+      <li class="hover:text-white transition-colors cursor-pointer">Home</li>
+      <li class="hover:text-white transition-colors cursor-pointer">About</li>
+      <li class="hover:text-white transition-colors cursor-pointer">Services</li>
+      <li class="hover:text-white transition-colors cursor-pointer">Contact</li>
+    </ul>
+
+    <button (click)="navigateToLogin()" class="px-6 py-2 bg-white text-black font-semibold rounded-lg hover:bg-gray-100 transition-colors text-sm">
+      Sign In
+    </button>
+  </nav>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 h-screen flex flex-col items-center justify-center px-6 text-center">
+    <div class="max-w-2xl">
+      <h1 class="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight">
+        Safety First, Always
+      </h1>
+
+      <p class="text-lg md:text-xl text-slate-600 mb-10 leading-relaxed">
+        Experience smarter city security with real-time monitoring and instant alerts.
+      </p>
+
+      <button (click)="navigateToLogin()" class="px-8 py-2 bg-slate-900 text-white font-bold text-lg  hover:bg-slate-800 transition-all duration-300 transform hover:scale-105">
+        Get Started
+      </button>
+    </div>
+  </div>
+
+</div>

@@ -6,7 +6,7 @@ import { getUserRole, normalizeRole, isTokenValid } from '../shared/auth-utils';
 export class RoleRedirect {
   constructor(router: Router) {
     if (!isTokenValid()) {
-      router.navigate(['/login']);
+      router.navigate(['/hero']);
       return;
     }
 

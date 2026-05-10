@@ -51,7 +51,7 @@ export class Sidebar implements OnInit {
       this.moduleLinks.push({ label: 'Review Center', path: '/pfom/review' });
     }
 
-    // ── EDRA links ──────────────────────────────────────────────────
+    // ── EDRA links ─────────────────────────────────────────────────
     if (['emergency_dispatcher', 'city_administrator', 'fire_fighter'].includes(r)) {
       this.moduleLinks.push({ label: 'EDRA Dashboard', path: '/edra/dashboard' });
       this.moduleLinks.push({ label: 'Resources', path: '/edra/resources' });

@@ -17,7 +17,7 @@ export class Navbar implements OnInit {
   userEmail = '';
   userInitials = 'SC';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.loadUser();
@@ -65,7 +65,7 @@ export class Navbar implements OnInit {
     this.isLoggedIn = false;
     this.userName = '';
     this.isProfileMenuOpen = false;
-    this.router.navigate(['/login']);
+    this.router.navigate(['/hero']);
   }
 
   goToLogin(): void {
