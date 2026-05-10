@@ -1,0 +1,76 @@
+<div class="min-h-screen bg-slate-50 pt-16">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+      <app-sidebar></app-sidebar>
+      <main class="min-w-0 space-y-4 pb-8">
+<section class="space-y-4">
+      <div class="border border-slate-200 bg-white p-4 sm:p-5 shadow-sm">
+        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">PFOM / Field Reports</p>
+        <h2 class="mt-1 text-lg sm:text-xl font-bold uppercase tracking-tight text-slate-900">Submit Operational Field Reports</h2>
+        <p class="mt-1 text-sm text-slate-500">Attach observations to active patrols and track your report history.</p>
+      </div>
+
+      @if (message) {
+        <div class="border px-3 py-2 text-sm shadow-sm"
+             [class.border-red-200]="messageType === 'error'"
+             [class.bg-red-50]="messageType === 'error'"
+             [class.text-red-800]="messageType === 'error'"
+             [class.border-sky-200]="messageType === 'success'"
+             [class.bg-sky-50]="messageType === 'success'"
+             [class.text-sky-800]="messageType === 'success'">
+          {{ message }}
+        </div>
+      }
+
+      @if (canSubmit) {
+        <section class="border border-slate-200 bg-white p-4 sm:p-5 shadow-sm space-y-4">
+          <h3 class="text-sm font-bold uppercase tracking-tight text-slate-900">Submit Report</h3>
+          <div class="grid gap-3 lg:grid-cols-3">
+            <div class="space-y-1">
+              <label for="report-patrol-id" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Patrol ID</label>
+              <input id="report-patrol-id" type="number" min="1" [(ngModel)]="patrolId" placeholder="Enter patrol ID" class="w-full border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900" />
+            </div>
+            <div class="space-y-1 lg:col-span-2">
+              <label for="report-date" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Report Date</label>
+              <input id="report-date" type="datetime-local" [(ngModel)]="reportDate" class="w-full border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900" />
+            </div>
+          </div>
+          <div class="space-y-1">
+            <label for="report-notes" class="block text-[10px] font-bold uppercase tracking-wider text-slate-400">Observation Notes</label>
+            <textarea id="report-notes" rows="5" [(ngModel)]="notes" placeholder="Write field observations (minimum 10 characters)" class="w-full border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"></textarea>
+          </div>
+          <button type="button" (click)="submitReport()" [disabled]="submitting" class="border border-slate-900 bg-slate-900 px-4 py-2.5 text-sm font-bold uppercase tracking-wider text-white transition-colors cursor-pointer hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900">
+            {{ submitting ? 'Submitting...' : 'Submit Field Report' }}
+          </button>
+        </section>
+      }
+
+      <section class="border border-slate-200 bg-white p-4 sm:p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <h3 class="text-sm font-bold uppercase tracking-tight text-slate-900">My Report History</h3>
+          <button type="button" (click)="loadMyHistory()" class="border border-slate-900 bg-white px-3 py-2 text-sm font-bold uppercase tracking-wider text-slate-900 transition-colors cursor-pointer hover:bg-slate-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900">Refresh</button>
+        </div>
+
+        @if (loadingHistory) {
+          <p class="text-sm text-slate-500">Loading reports...</p>
+        }
+
+        <div class="space-y-2">
+          @for (report of reports; track report.reportId) {
+            <div class="border border-slate-200 px-3 py-2 text-sm text-slate-700">
+              <p class="font-bold">REP-{{ report.reportId }} · Patrol {{ report.patrolId }}</p>
+              <p class="mt-1 text-xs">{{ report.notes }}</p>
+              <p class="mt-1 text-xs text-slate-500">Status: {{ report.status }} | {{ report.date | date:'dd MMM yyyy, hh:mm a' }}</p>
+            </div>
+          }
+          @if (!loadingHistory && reports.length === 0) {
+            <p class="text-sm text-slate-500">No report history available.</p>
+          }
+        </div>
+        
+      </section>
+    </section>
+      </main>
+    </div>
+  </div>
+</div>

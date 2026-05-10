@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SafeCity.IAM/SafeCity.IAM.csproj" />
+  <Project Path="SafeCity.IAMDB/SafeCity.IAMDB.csproj" />
+</Solution>

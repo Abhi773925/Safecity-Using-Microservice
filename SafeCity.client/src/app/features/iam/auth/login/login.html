@@ -1,0 +1,124 @@
+<!-- Minimalist Login Page -->
+<div class="min-h-screen bg-slate-50 flex items-center justify-center p-4 pt-20">
+	<div class="w-full max-w-md">
+		<!-- Header -->
+		<div class="mb-8">
+			<div class="flex items-center gap-3 mb-4 justify-center">
+				<div class="w-10 h-10 rounded-lg bg-slate-900 flex items-center justify-center">
+					<span class="text-white font-bold">SC</span>
+				</div>
+				<h1 class="text-2xl font-bold text-slate-900">SafeCity</h1>
+			</div>
+			<h2 class="text-center text-xl font-semibold text-slate-900 mb-2">Welcome Back</h2>
+			<p class="text-center text-sm text-slate-600">Sign in to your account to continue</p>
+		</div>
+
+		<!-- Card -->
+		<div class="bg-white border border-slate-200 rounded-lg p-8 shadow-sm">
+			<!-- Messages -->
+			@if (successMessage) {
+				<div class="bg-green-50 border border-green-200 text-green-800 rounded-lg p-4 mb-4 text-sm">
+					{{ successMessage }}
+				</div>
+			}
+
+			@if (errorMessage) {
+				<div class="bg-red-50 border border-red-200 text-red-800 rounded-lg p-4 mb-4 text-sm">
+					{{ errorMessage }}
+				</div>
+			}
+
+			<!-- Form -->
+			<form [formGroup]="loginForm" (ngSubmit)="submitLogin()" class="space-y-5" novalidate>
+				<!-- Email -->
+				<div>
+					<label for="email" class="block text-sm font-semibold text-slate-700 mb-2">Email Address</label>
+					<input
+						id="email"
+						type="email"
+						formControlName="email"
+						autocomplete="email"
+						placeholder="your@email.com"
+						class="w-full px-3 py-2 border border-slate-200 rounded-lg bg-white text-slate-900 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+					/>
+					@if (emailControl.touched && emailControl.invalid) {
+						<p class="text-xs text-red-600 mt-1">
+							@if (emailControl.hasError('required')) {
+								Email is required
+							} @else if (emailControl.hasError('email')) {
+								Enter a valid email address
+							}
+						</p>
+					}
+				</div>
+
+				<!-- Password -->
+				<div>
+					<div class="flex items-center justify-between mb-2">
+						<label for="password" class="block text-sm font-semibold text-slate-700">Password</label>
+					</div>
+					<div class="relative">
+						<input
+							id="password"
+							[type]="showPassword ? 'text' : 'password'"
+							formControlName="password"
+							autocomplete="current-password"
+							placeholder="Enter your password"
+							class="w-full px-3 py-2 border border-slate-200 rounded-lg bg-white text-slate-900 placeholder:text-slate-500 pr-10 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+						/>
+						<button
+							type="button"
+							class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-700 transition-colors"
+							[attr.aria-label]="showPassword ? 'Hide password' : 'Show password'"
+							(click)="togglePasswordVisibility()"
+						>
+							@if (showPassword) {
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-4.803m5.596-3.856a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0m7.6 0a6 6 0 01-5.922 7.97m5.006-4.428a6 6 0 01.918 5.52m2.748-9.464a6 6 0 00-9.545-5.565m3.039 2.25a3 3 0 01-5.356 3m4.798 8.045a3 3 0 01-2.12.84H8"></path>
+								</svg>
+							} @else {
+								<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+								</svg>
+							}
+						</button>
+					</div>
+					@if (passwordControl.touched && passwordControl.invalid) {
+						<p class="text-xs text-red-600 mt-1">
+							@if (passwordControl.hasError('required')) {
+								Password is required
+							} @else if (passwordControl.hasError('minlength')) {
+								Password must be at least 6 characters
+							}
+						</p>
+					}
+				</div>
+				<!-- Submit Button -->
+				<button
+					type="submit"
+					class="w-full px-4 py-2 bg-slate-900 text-white font-semibold cursor-pointer hover:bg-slate-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+					[disabled]=" !loginForm.valid || isSubmitting"
+				>
+					@if (isSubmitting) {
+						<span class="inline-flex items-center gap-2">
+							<span class="inline-block w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></span>
+							Signing in...
+						</span>
+					} @else {
+						Sign In
+					}
+				</button>
+			</form>
+
+			<!-- Footer -->
+			<div class="mt-6 space-y-3">
+				<div class="text-center text-sm">
+					<span class="text-slate-600">Don't have an account? </span>
+					<a routerLink="/register" class="font-semibold text-slate-900 hover:text-slate-700 transition-colors">Sign up</a>
+				</div>
+				<p class="text-center text-xs text-slate-500">Protected access for authorized users only</p>
+			</div>
+		</div>
+	</div>
+</div>

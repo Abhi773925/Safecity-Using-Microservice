@@ -1,0 +1,12 @@
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\bin\Debug\net10.0\SafeCity_PFOMDB.deps.json
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\bin\Debug\net10.0\SafeCity_PFOMDB.dll
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\bin\Debug\net10.0\SafeCity_PFOMDB.pdb
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\SafeCity_PFOMDB.csproj.AssemblyReference.cache
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\SafeCity_PFOMDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\SafeCity_PFOMDB.AssemblyInfoInputs.cache
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\SafeCity_PFOMDB.AssemblyInfo.cs
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\SafeCity_PFOMDB.csproj.CoreCompileInputs.cache
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\SafeCity_PFOMDB.dll
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\refint\SafeCity_PFOMDB.dll
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\SafeCity_PFOMDB.pdb
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.PFOM\SafeCity_PFOMDB\obj\Debug\net10.0\ref\SafeCity_PFOMDB.dll

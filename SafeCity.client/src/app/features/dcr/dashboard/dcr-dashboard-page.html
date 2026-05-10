@@ -1,0 +1,106 @@
+<div class="min-h-screen bg-slate-50 pt-16">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+      <app-sidebar></app-sidebar>
+      <main class="min-w-0 space-y-4 pb-8">
+<section class="space-y-6">
+      <div class="flex items-center justify-between gap-4 bg-white border border-slate-200 p-5 shadow-sm">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">DCR / Overview</p>
+          <h2 class="text-xl font-bold text-slate-900">Response Dashboard</h2>
+        </div>
+        <button (click)="refresh()" class="border border-slate-900 bg-white px-4 py-2 text-sm font-semibold text-slate-900 hover:bg-slate-900 hover:text-white transition-all active:scale-95">
+          Refresh Data
+        </button>
+      </div>
+
+      @if (error) {
+        <div class="border border-red-200 bg-red-50 p-3 text-sm text-red-700 font-medium">
+          {{ error }}
+        </div>
+      }
+
+      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="border border-slate-200 bg-white p-5 shadow-sm">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Active Crises</p>
+          <p class="mt-2 text-3xl font-bold text-slate-900">{{ activeCrises.length }}</p>
+        </div>
+        <div class="border border-slate-200 bg-white p-5 shadow-sm">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Available Teams</p>
+          <p class="mt-2 text-3xl font-bold text-slate-900">{{ availableTeams.length }}</p>
+        </div>
+        <div class="border border-slate-200 bg-white p-5 shadow-sm">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Active Deployments</p>
+          <p class="mt-2 text-3xl font-bold text-slate-900">{{ activeDeployments.length }}</p>
+        </div>
+        <div class="border border-slate-900 bg-slate-900 p-5 shadow-sm text-white">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400 text-slate-300">Response Ready</p>
+          <p class="mt-2 text-3xl font-bold">{{ responseReadyCount }}</p>
+        </div>
+      </div>
+
+      <div class="grid gap-6 xl:grid-cols-2">
+        <section class="border border-slate-200 bg-white p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-tight">Recent Crises</h3>
+            @if (loadingCrises) { <span class="text-[10px] text-slate-400 animate-pulse">Syncing...</span> }
+          </div>
+          
+          <div class="space-y-3">
+            @for (crisis of activeCrises.slice(0, 5); track crisis.crisisId) {
+              <div class="group border border-slate-100 bg-slate-50/50 p-3 hover:border-slate-300 transition-colors">
+                <div class="flex justify-between items-start">
+                  <p class="font-bold text-slate-900 text-sm">CR-{{ crisis.crisisId }} · {{ crisis.type }}</p>
+                  <span class="text-[10px] font-bold px-2 py-0.5 border border-slate-200 text-slate-500 bg-white uppercase">{{ crisis.severity }}</span>
+                </div>
+                <p class="text-xs text-slate-600 mt-1">{{ crisis.location }} · {{ crisis.status }}</p>
+                <p class="text-[10px] text-slate-400 mt-2">{{ crisis.date | date:'dd MMM yyyy, hh:mm a' }}</p>
+              </div>
+            }
+          </div>
+        </section>
+
+        <section class="border border-slate-200 bg-white p-5 shadow-sm space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+            <h3 class="text-sm font-bold text-slate-900 uppercase tracking-tight">Recent Deployments</h3>
+            @if (loadingDeployments) { <span class="text-[10px] text-slate-400 animate-pulse">Syncing...</span> }
+          </div>
+
+          <div class="space-y-3">
+            @for (deployment of activeDeployments.slice(0, 5); track deployment.responseId) {
+              <div class="group border border-slate-100 bg-slate-50/50 p-3 hover:border-slate-300 transition-colors">
+                <p class="font-bold text-slate-900 text-sm">DEP-{{ deployment.responseId }} · {{ deployment.teamName }}</p>
+                <div class="flex items-center justify-between mt-1 text-xs">
+                  <p class="text-slate-600">{{ deployment.crisisLocation }}</p>
+                  <span class="font-bold text-slate-900 uppercase">{{ deployment.status }}</span>
+                </div>
+              </div>
+            }
+          </div>
+        </section>
+      </div>
+
+      <section class="border border-slate-200 bg-white p-5 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <h3 class="text-sm font-bold text-slate-900 uppercase tracking-tight">Team Availability</h3>
+          <span class="text-[10px] font-bold text-slate-400 uppercase">{{ availableTeams.length }} Teams Available</span>
+        </div>
+        
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          @for (team of availableTeams.slice(0, 6); track team.teamID) {
+            <div class="border border-slate-100 bg-slate-50/30 p-3">
+              <p class="font-bold text-slate-900 text-sm">TEAM-{{ team.teamID }}</p>
+              <p class="text-xs text-slate-700 font-medium">{{ team.teamName }}</p>
+              <div class="mt-2 flex justify-between items-center text-[10px] text-slate-500 uppercase tracking-tighter">
+                <span>Lead ID: {{ team.teamLeadID }}</span>
+                <span class="font-bold text-emerald-600">{{ team.status }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    </section>
+      </main>
+    </div>
+  </div>
+</div>

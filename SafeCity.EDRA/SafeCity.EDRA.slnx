@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SafeCity.EDRA/SafeCity.EDRA.csproj" />
+  <Project Path="SafeCity_EDRADB/SafeCity_EDRADB.csproj" />
+</Solution>

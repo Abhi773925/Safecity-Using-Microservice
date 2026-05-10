@@ -1,0 +1,6 @@
+@SafeCity.DCR_HostAddress = http://localhost:5271
+
+GET {{SafeCity.DCR_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

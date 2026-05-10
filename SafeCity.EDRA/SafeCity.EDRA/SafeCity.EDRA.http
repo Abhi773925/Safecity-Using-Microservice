@@ -1,0 +1,6 @@
+@SafeCity.EDRA_HostAddress = http://localhost:5281
+
+GET {{SafeCity.EDRA_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

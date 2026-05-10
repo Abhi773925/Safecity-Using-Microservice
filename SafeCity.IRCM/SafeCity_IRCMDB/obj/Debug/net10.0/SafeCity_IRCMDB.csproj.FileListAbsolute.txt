@@ -1,0 +1,12 @@
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\bin\Debug\net10.0\SafeCity_IRCMDB.deps.json
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\bin\Debug\net10.0\SafeCity_IRCMDB.dll
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\bin\Debug\net10.0\SafeCity_IRCMDB.pdb
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\SafeCity_IRCMDB.csproj.AssemblyReference.cache
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\SafeCity_IRCMDB.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\SafeCity_IRCMDB.AssemblyInfoInputs.cache
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\SafeCity_IRCMDB.AssemblyInfo.cs
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\SafeCity_IRCMDB.csproj.CoreCompileInputs.cache
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\SafeCity_IRCMDB.dll
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\refint\SafeCity_IRCMDB.dll
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\SafeCity_IRCMDB.pdb
+C:\Users\2478722\Desktop\SafeCity-Final\SafeCity.IRCM\SafeCity_IRCMDB\obj\Debug\net10.0\ref\SafeCity_IRCMDB.dll

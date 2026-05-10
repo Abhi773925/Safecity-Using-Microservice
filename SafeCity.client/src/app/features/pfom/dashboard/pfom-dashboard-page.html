@@ -1,0 +1,81 @@
+<div class="min-h-screen bg-slate-50 pt-16">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+      <app-sidebar></app-sidebar>
+      <main class="min-w-0 space-y-4 pb-8">
+<section class="border border-slate-200 bg-white p-4 sm:p-5 shadow-sm space-y-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">PFOM / Dashboard</p>
+          <h2 class="text-lg sm:text-xl font-bold uppercase tracking-tight text-slate-900">Patrol & Field Operations Dashboard</h2>
+        </div>
+        <button type="button" (click)="refresh()" class="border border-slate-900 bg-white px-3 py-2 text-sm font-bold uppercase tracking-wider text-slate-900 transition-colors cursor-pointer hover:bg-slate-900 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900">Refresh</button>
+      </div>
+
+      @if (error) {
+        <div class="border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-800 shadow-sm">{{ error }}</div>
+      }
+
+      <div class="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="border border-slate-200 bg-slate-50 p-3">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Assigned Patrols</p>
+          <p class="mt-1 text-2xl font-bold text-slate-900">{{ patrols.length }}</p>
+        </div>
+        <div class="border border-slate-200 bg-slate-50 p-3">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Patrol In Progress</p>
+          <p class="mt-1 text-2xl font-bold text-slate-900">{{ onPatrolCount }}</p>
+        </div>
+        <div class="border border-slate-200 bg-slate-50 p-3">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">My Field Reports</p>
+          <p class="mt-1 text-2xl font-bold text-slate-900">{{ myReports.length }}</p>
+        </div>
+        <div class="border border-slate-200 bg-slate-50 p-3">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Pending Reviews</p>
+          <p class="mt-1 text-2xl font-bold text-slate-900">{{ reviewPendingCount }}</p>
+        </div>
+      </div>
+
+      <div class="grid gap-4 xl:grid-cols-2">
+        <section class="border border-slate-200 bg-white p-4 shadow-sm space-y-3">
+          <h3 class="text-sm font-bold uppercase tracking-tight text-slate-900">Recent Patrol Assignments</h3>
+          @if (loadingPatrols) {
+            <p class="text-sm text-slate-500">Loading patrols...</p>
+          }
+          <div class="space-y-2">
+            @for (patrol of patrols.slice(0, 5); track patrol.patrolId) {
+              <div class="border border-slate-200 px-3 py-2 text-sm text-slate-700">
+                <p class="font-bold">PAT-{{ patrol.patrolId }} · {{ patrol.area }}</p>
+                <p class="text-xs">Officer: {{ patrol.officerId }} | Status: {{ patrol.status }}</p>
+                <p class="text-xs text-slate-500">Date: {{ patrol.date | date:'dd MMM yyyy, hh:mm a' }}</p>
+              </div>
+            }
+            @if (patrols.length === 0 && !loadingPatrols) {
+              <p class="text-sm text-slate-500">No patrol records available for your role.</p>
+            }
+          </div>
+        </section>
+
+        <section class="border border-slate-200 bg-white p-4 shadow-sm space-y-3">
+          <h3 class="text-sm font-bold uppercase tracking-tight text-slate-900">Recent Field Reports</h3>
+          @if (loadingReports) {
+            <p class="text-sm text-slate-500">Loading field reports...</p>
+          }
+          <div class="space-y-2">
+            @for (report of dashboardReports.slice(0, 5); track report.reportId) {
+              <div class="border border-slate-200 px-3 py-2 text-sm text-slate-700">
+                <p class="font-bold">REP-{{ report.reportId }} · Patrol {{ report.patrolId }}</p>
+                <p class="text-xs">Status: {{ report.status }}</p>
+                <p class="text-xs text-slate-500">{{ report.date | date:'dd MMM yyyy, hh:mm a' }}</p>
+              </div>
+            }
+            @if (dashboardReports.length === 0 && !loadingReports) {
+              <p class="text-sm text-slate-500">No field reports found for your role.</p>
+            }
+          </div>
+        </section>
+      </div>
+    </section>
+      </main>
+    </div>
+  </div>
+</div>

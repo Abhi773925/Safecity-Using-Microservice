@@ -1,0 +1,317 @@
+{
+  "Routes": [
+    // --- SWAGGER JSON TUNNELS (Updated with /api/v1 prefix) ---
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/docs/iam/swagger.json",
+      "UpstreamMethods": [ "Get" ],
+      "SwaggerKey": "IAM"
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5244
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/docs/ircm/swagger.json",
+      "UpstreamMethods": [ "Get" ],
+      "SwaggerKey": "IRCM"
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5281
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/docs/edra/swagger.json",
+      "UpstreamMethods": [ "Get" ],
+      "SwaggerKey": "EDRA"
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5120
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/docs/pfom/swagger.json",
+      "UpstreamMethods": [ "Get" ],
+      "SwaggerKey": "PFOM"
+    },
+    {
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5271
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/docs/dcr/swagger.json",
+      "UpstreamMethods": [ "Get" ],
+      "SwaggerKey": "DCR"
+    },
+
+    // --- 1. IAM ---
+    {
+      "DownstreamPathTemplate": "/api/user/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5000
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/auth/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "IAM"
+    },
+
+    // --- 2. IRCM ---
+    {
+      "DownstreamPathTemplate": "/api/case/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5244
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/case/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Delete" ],
+      "SwaggerKey": "IRCM"
+    },
+    {
+      "DownstreamPathTemplate": "/api/incident/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5244
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/incident/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "IRCM"
+    },
+    {
+      "DownstreamPathTemplate": "/api/incident/my-incidents",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5244
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/incident/my-incidents",
+      "UpstreamMethods": [ "Get" ],
+      "SwaggerKey": "IRCM"
+    },
+
+    // --- 3. EDRA ---
+    {
+      "DownstreamPathTemplate": "/api/resources/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5281
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/resources/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "EDRA"
+    },
+    {
+      "DownstreamPathTemplate": "/api/dispatcher/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5281
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/dispatcher/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "EDRA"
+    },
+
+    // --- 4. PFOM ---
+    {
+      "DownstreamPathTemplate": "/api/patrol/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5120
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/patrol/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "PFOM"
+    },
+    {
+      "DownstreamPathTemplate": "/api/fieldreport/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5120
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/fieldreport/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "PFOM"
+    },
+
+    // --- 5. DCR ---
+    {
+      "DownstreamPathTemplate": "/api/crisis",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5271
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/crisis",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "DCR"
+    },
+    {
+      "DownstreamPathTemplate": "/api/crisis/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5271
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/crisis/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "DCR"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Team",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5271
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/team",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "DCR"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Team/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5271
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/team/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "DCR"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Response",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5271
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/response",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "DCR"
+    },
+    {
+      "DownstreamPathTemplate": "/api/Response/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5271
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v1/response/{everything}",
+      "UpstreamMethods": [ "Get", "Post", "Put", "Patch", "Delete" ],
+      "SwaggerKey": "DCR"
+    }
+  ],
+  "SwaggerEndPoints": [
+    {
+      "Key": "IAM",
+      "Config": [
+        {
+          "Name": "IAM API",
+          "Version": "v1",
+          "Url": "http://localhost:8000/api/v1/docs/iam/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "IRCM",
+      "Config": [
+        {
+          "Name": "IRCM API",
+          "Version": "v1",
+          "Url": "http://localhost:8000/api/v1/docs/ircm/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "EDRA",
+      "Config": [
+        {
+          "Name": "EDRA API",
+          "Version": "v1",
+          "Url": "http://localhost:8000/api/v1/docs/edra/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "PFOM",
+      "Config": [
+        {
+          "Name": "PFOM API",
+          "Version": "v1",
+          "Url": "http://localhost:8000/api/v1/docs/pfom/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "DCR",
+      "Config": [
+        {
+          "Name": "DCR API",
+          "Version": "v1",
+          "Url": "http://localhost:8000/api/v1/docs/dcr/swagger.json"
+        }
+      ]
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8000"
+  }
+}

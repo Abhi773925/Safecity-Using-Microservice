@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SafeCity.IRCM/SafeCity.IRCM.csproj" />
+  <Project Path="SafeCity_IRCMDB/SafeCity_IRCMDB.csproj" />
+</Solution>

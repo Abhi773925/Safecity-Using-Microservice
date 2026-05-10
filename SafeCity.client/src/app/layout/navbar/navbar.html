@@ -1,0 +1,58 @@
+<nav class="fixed top-0 w-full bg-white border-b border-slate-200 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4">
+    <div class="flex items-center justify-between gap-4">
+
+      <!-- Logo -->
+      <div class="flex items-center cursor-pointer" routerLink="/">
+        <h1 class="text-lg font-bold text-slate-900">SafeCity</h1>
+      </div>
+
+      <!-- Right side -->
+      <div class="flex items-center gap-2">
+
+        @if (isLoggedIn) {
+          <div class="relative">
+            <button
+              type="button"
+              class="h-10 w-10 rounded-full border border-slate-200 bg-white text-slate-700 flex items-center justify-center cursor-pointer hover:bg-slate-900 hover:text-white"
+              (click)="toggleProfileMenu()"
+            >
+              <span class="text-xs font-bold">{{ userInitials }}</span>
+            </button>
+
+            @if (isProfileMenuOpen) {
+              <div class="absolute right-0 mt-2 w-52 bg-white border border-slate-200 shadow-sm z-50">
+                <div class="px-4 py-3 border-b border-slate-200">
+                  <p class="text-sm font-semibold text-slate-900">{{ userName }}</p>
+                  <p class="text-xs text-slate-500">{{ userEmail }}</p>
+                </div>
+                <a routerLink="/change-password" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100" (click)="isProfileMenuOpen = false">Change Password</a>
+                <a routerLink="/delete-account" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-100" (click)="isProfileMenuOpen = false">Delete Account</a>
+                <div class="border-t border-slate-200"></div>
+                <button type="button" class="w-full text-left px-4 py-2 text-sm text-red-700 hover:bg-red-50" (click)="logout()">Logout</button>
+              </div>
+            }
+          </div>
+        } @else {
+          <button
+            type="button"
+            class="border border-slate-900 bg-slate-900 px-3 py-2 text-xs font-bold uppercase tracking-wider text-white cursor-pointer hover:bg-slate-800"
+            (click)="goToLogin()"
+          >
+            Login
+          </button>
+        }
+
+        <button
+          type="button"
+          class="md:hidden h-10 w-10 border border-slate-200 bg-white text-slate-700 cursor-pointer hover:bg-slate-900 hover:text-white flex items-center justify-center"
+          (click)="toggleMobileMenu()"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

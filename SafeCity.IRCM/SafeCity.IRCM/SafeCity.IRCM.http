@@ -1,0 +1,6 @@
+@SafeCity.IRCM_HostAddress = http://localhost:5244
+
+GET {{SafeCity.IRCM_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

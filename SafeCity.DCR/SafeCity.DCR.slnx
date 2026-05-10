@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SafeCity.DCR/SafeCity.DCR.csproj" />
+  <Project Path="SafeCity_DCRDB/SafeCity_DCRDB.csproj" />
+</Solution>

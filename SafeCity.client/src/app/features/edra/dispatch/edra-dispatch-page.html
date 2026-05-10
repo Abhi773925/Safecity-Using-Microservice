@@ -1,0 +1,26 @@
+<div class="min-h-screen bg-slate-50 pt-16">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+      <app-sidebar></app-sidebar>
+      <main class="min-w-0 space-y-4 pb-8">
+<app-edra-dispatch
+      [dispatches]="dispatches"
+      [loading]="loading"
+      [submitting]="submitting"
+      [newDispatchResourceId]="newDispatchResourceId"
+      [newDispatchIncidentId]="newDispatchIncidentId"
+      [pendingIncidentCount]="pendingIncidentCount"
+      [availableResourceCount]="availableResourceCount"
+      [dispatcherOnly]="dispatcherOnly"
+      [newDispatchResourceId]="newDispatchResourceId"
+      [newDispatchIncidentId]="newDispatchIncidentId"
+      (dispatchResource)="dispatchResource()"
+      (assignResource)="assignResource()"
+      (updateDispatchStatus)="updateDispatchStatusEvent($event)"
+      (completeDispatch)="completeDispatch($event)"
+      (refreshDashboard)="loadDashboard()"
+    ></app-edra-dispatch>
+      </main>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="SafeCity.PFOM/SafeCity.PFOM.csproj" />
+  <Project Path="SafeCity_PFOMDB/SafeCity_PFOMDB.csproj" />
+</Solution>

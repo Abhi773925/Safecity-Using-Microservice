@@ -1,0 +1,169 @@
+<div class="min-h-screen bg-slate-50 pt-16">
+  <div class="max-w-7xl mx-auto px-4 py-8">
+    <div class="grid gap-6 lg:grid-cols-[240px_minmax(0,1fr)]">
+      <app-sidebar></app-sidebar>
+      <main class="min-w-0 space-y-4 pb-8">
+<section class="space-y-6">
+      <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+        <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">DCR / Crisis Management</p>
+        <h2 class="mt-1 text-xl font-bold text-slate-900">Crisis Declaration & Tracking</h2>
+        <p class="mt-1 text-sm text-slate-500">Declare new crises, filter active incidents, and update states.</p>
+      </div>
+
+      @if (!canView) {
+        <div class="rounded-lg border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          You are not authorized to view crisis records.
+        </div>
+      } @else {
+        @if (message) {
+          <div class="rounded-lg border p-4 text-sm font-medium transition-all"
+               [ngClass]="messageType === 'error' ? 'border-red-200 bg-red-50 text-red-700' : 'border-emerald-200 bg-emerald-50 text-emerald-700'">
+            {{ message }}
+          </div>
+        }
+
+        <div class="space-y-6">
+          
+          <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div class="grid gap-4 lg:grid-cols-4">
+              <div class="lg:col-span-2">
+                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Search Crisis</label>
+                <input [(ngModel)]="searchText" placeholder="Search by id, type, or location..." 
+                       class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900 transition-all" />
+              </div>
+              <div>
+                <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Status</label>
+                <select [(ngModel)]="statusFilter" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900">
+                  <option value="All">All Statuses</option>
+                  <option *ngFor="let status of crisisStatusOptions" [value]="status">{{ status }}</option>
+                </select>
+              </div>
+              <div class="flex items-end">
+                <button (click)="refresh()" class="w-full rounded-lg border border-slate-200 bg-white py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">
+                  Refresh Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+          @if (canCreateOrUpdate) {
+            <div class="grid gap-6 lg:grid-cols-3">
+              <div class="lg:col-span-2 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+                <div class="flex items-center justify-between mb-6">
+                  <h3 class="font-bold text-slate-900">{{ selectedCrisisId ? 'Update Crisis Details' : 'Declare New Crisis' }}</h3>
+                  @if (selectedCrisisId) {
+                    <button (click)="clearSelection()" class="text-xs font-bold text-slate-400 hover:text-slate-900 uppercase tracking-tight">Cancel Edit</button>
+                  }
+                </div>
+
+                <form (ngSubmit)="saveCrisis()" class="space-y-4">
+                  <div class="grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Type</label>
+                      <select [(ngModel)]="type" name="type" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:ring-2 focus:ring-slate-900">
+                        <option *ngFor="let option of typeOptions" [value]="option.value">{{ option.label }}</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Severity</label>
+                      <select [(ngModel)]="severity" name="severity" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:ring-2 focus:ring-slate-900">
+                        <option *ngFor="let option of severityOptions" [value]="option.value">{{ option.label }}</option>
+                      </select>
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Location</label>
+                      <input [(ngModel)]="location" name="location" placeholder="Exact address or coordinates" 
+                             class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:ring-2 focus:ring-slate-900" />
+                    </div>
+                    <div class="sm:col-span-2">
+                      <label class="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-1.5 block">Crisis Status</label>
+                      <select [(ngModel)]="status" name="status" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:ring-2 focus:ring-slate-900">
+                        <option *ngFor="let option of crisisStatusOptions; let i = index" [value]="i">{{ option }}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
+                    <button type="button" (click)="resetForm()" class="px-4 py-2 text-sm font-semibold text-slate-500 hover:text-slate-900 transition-colors">Reset</button>
+                    <button type="submit" [disabled]="submitting" 
+                            class="rounded-lg bg-slate-900 px-6 py-2 text-sm font-bold text-white hover:bg-slate-800 disabled:opacity-50 transition-all">
+                      {{ submitting ? 'Processing...' : (selectedCrisisId ? 'Update Record' : 'Declare Crisis') }}
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <div class="rounded-xl border border-slate-200 bg-slate-900 p-6 text-white shadow-sm">
+                <h3 class="font-bold mb-6">Status Summary</h3>
+                <div class="space-y-6">
+                  <div>
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Records Loaded</p>
+                    <p class="text-4xl font-bold mt-1">{{ filteredCrises.length }}</p>
+                  </div>
+                  <div class="pt-6 border-t border-slate-800">
+                    <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Current Selection</p>
+                    <p class="text-xl font-bold mt-1 text-slate-300">{{ selectedCrisisId ? '#' + selectedCrisisId : 'None' }}</p>
+                  </div>
+                  @if (loading) {
+                    <p class="text-xs text-slate-400 animate-pulse">Syncing with server...</p>
+                  }
+                </div>
+              </div>
+            </div>
+          }
+
+          <div class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm text-left">
+                <thead>
+                  <tr class="border-b border-slate-100 bg-slate-50/50">
+                    <th class="px-4 py-3 font-bold text-slate-900 text-xs uppercase tracking-wider">ID</th>
+                    <th class="px-4 py-3 font-bold text-slate-900 text-xs uppercase tracking-wider">Type</th>
+                    <th class="px-4 py-3 font-bold text-slate-900 text-xs uppercase tracking-wider">Location</th>
+                    <th class="px-4 py-3 font-bold text-slate-900 text-xs uppercase tracking-wider">Severity</th>
+                    <th class="px-4 py-3 font-bold text-slate-900 text-xs uppercase tracking-wider">Status</th>
+                    <th class="px-4 py-3 font-bold text-slate-900 text-xs uppercase tracking-wider text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-50">
+                  @for (crisis of filteredCrises; track crisis.crisisId) {
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                      <td class="px-4 py-4 font-bold text-slate-900">#{{ crisis.crisisId }}</td>
+                      <td class="px-4 py-4 text-slate-600">{{ crisis.type }}</td>
+                      <td class="px-4 py-4 text-slate-600">{{ crisis.location }}</td>
+                      <td class="px-4 py-4">
+                        <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded border border-slate-200 bg-white text-slate-600">
+                          {{ crisis.severity }}
+                        </span>
+                      </td>
+                      <td class="px-4 py-4">
+                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-bold" 
+                              [ngClass]="statusClass(crisis.status)">
+                          <span class="h-1.5 w-1.5 rounded-full bg-current"></span>
+                          {{ crisis.status }}
+                        </span>
+                      </td>
+                      <td class="px-4 py-4 text-right">
+                        <button (click)="selectCrisis(crisis)" 
+                                class="text-xs font-bold text-slate-900 hover:bg-slate-100 px-3 py-1 rounded-md transition-colors border border-slate-200">
+                          Edit
+                        </button>
+                      </td>
+                    </tr>
+                  }
+                  @if (!loading && filteredCrises.length === 0) {
+                    <tr>
+                      <td colspan="6" class="px-4 py-12 text-center text-slate-400 italic">No records match your search criteria.</td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      }
+    </section>
+      </main>
+    </div>
+  </div>
+</div>
